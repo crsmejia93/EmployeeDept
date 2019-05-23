@@ -50,6 +50,7 @@ public class HomeController {
     @GetMapping("/viewdep/{id}")
     public String viewDepartment(@PathVariable("id") long id, Model model){
         model.addAttribute("department", departmentRepository.findById(id).get());
+        model.addAttribute("employees", employeeRepository.findAll());
         return "showdep";
     }
 

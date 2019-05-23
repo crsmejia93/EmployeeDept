@@ -2,9 +2,26 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:inline="text">[[${department.name}]] Department</title>
 </head>
 <body>
-
+<h2>List of Employees</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody th:each="emp: ${department.employees}">
+    <tr>
+        <td th:text="${emp.firstName}"></td>
+        <td>
+            <a th:href="@{/updatedep/{id}(id=${emp.id})}">Update</a>
+            <a th:href="@{/viewdep/{id}(id=${emp.id})}">View</a>
+            <a th:href="@{/deletedep/{id}(id=${emp.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

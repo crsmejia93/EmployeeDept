@@ -15,10 +15,6 @@ public class Department {
     @Size(min = 5)
     private String name;
 
-    @NotNull
-    @Size(min = 5)
-    private String company;
-
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Set<Employee> employees;
 
@@ -36,14 +32,6 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
     }
 
     public Set<Employee> getEmployees() {
