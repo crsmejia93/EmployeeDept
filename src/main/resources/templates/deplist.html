@@ -6,7 +6,7 @@
 </head>
 <body>
 <nav>
-    <a href="deplist.html">Show All Departments</a>
+    <a href="/">Show All Departments</a>
     <a th:href="@{/departmentform}">Add A Department</a>
 </nav>
 <div>
@@ -23,6 +23,7 @@
                 <td>
                     <a th:href="@{/updatedep/{id}(id=${dep.id})}">Update</a>
                     <a th:href="@{/viewdep/{id}(id=${dep.id})}">View</a>
+                    <a th:href="@{/addemployee}">Add Employee</a>
                     <a th:href="@{/deletedep/{id}(id=${dep.id})}">Delete</a>
                 </td>
             </tr>

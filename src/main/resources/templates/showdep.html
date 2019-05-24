@@ -5,8 +5,13 @@
     <title th:inline="text">[[${department.name}]] Department</title>
 </head>
 <body>
-<h2>List of Employees</h2>
+<nav>
+    <a href="/">Show All Departments</a>
+    <a th:href="@{/departmentform}">Add A Department</a>
+</nav>
+<h2 th:text="${department.name}"></h2>
 <table>
+    <h4>All Current Employees</h4>
     <thead>
     <tr>
         <th>Name</th>
@@ -16,9 +21,9 @@
     <tr>
         <td th:text="${emp.firstName}"></td>
         <td>
-            <a th:href="@{/updatedep/{id}(id=${emp.id})}">Update</a>
-            <a th:href="@{/viewdep/{id}(id=${emp.id})}">View</a>
-            <a th:href="@{/deletedep/{id}(id=${emp.id})}">Delete</a>
+            <a th:href="@{/updateemp/{id}(id=${emp.id})}">Update</a>
+            <a th:href="@{/viewemp/{id}(id=${emp.id})}">View</a>
+            <a th:href="@{/deleteemp/{id}(id=${emp.id})}">Delete</a>
         </td>
     </tr>
     </tbody>

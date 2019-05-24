@@ -3,9 +3,10 @@ package com.example.employeedept;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class HomeController {
@@ -27,18 +28,30 @@ public class HomeController {
         return "depform";
     }
 
-    @GetMapping("/employeeform")
-    public String employeeForm(@PathVariable("id") long id, Model model){
-        model.addAttribute("department", departmentRepository.findById(id).get());
-        model.addAttribute("employee", new Employee());
-        return "empform";
-    }
 
     @GetMapping("/emplist")
     public String showEmployees(Model model){
         model.addAttribute("employees", employeeRepository.findAll());
         model.addAttribute("departments", departmentRepository.findAll());
         return "emplist";
+    }
+
+    @PostMapping("/processDepartment")
+    public String processDepartment(@Valid Department department, BindingResult result){
+        if(result.hasErrors()){
+            return "depform";
+        }
+        departmentRepository.save(department);
+        return "redirect:/";
+    }
+
+    @PostMapping("/processEmployee")
+    public String processEmployee(@Valid Employee employee, BindingResult result){
+        if(result.hasErrors()){
+            return "empform";
+        }
+        employeeRepository.save(employee);
+        return "redirect:/";
     }
 
     @GetMapping("/updatedep/{id}")
@@ -63,6 +76,7 @@ public class HomeController {
     @GetMapping("/updateemp/{id}")
     public String updateEmployee(@PathVariable("id") long id, Model model){
         model.addAttribute("employee", employeeRepository.findById(id).get());
+        model.addAttribute("department", employeeRepository.findAll());
         return "empform";
     }
 
@@ -70,6 +84,13 @@ public class HomeController {
     public String viewEmployee(@PathVariable("id") long id, Model model){
         model.addAttribute("employee",employeeRepository.findById(id).get());
         return "showemp";
+    }
+
+    @GetMapping("/addemployee")
+    public String employeeForm(Model model){
+        model.addAttribute("departments", departmentRepository.findAll());
+        model.addAttribute("employee", new Employee());
+        return "empform";
     }
 
     @GetMapping("/deleteemp/{id}")

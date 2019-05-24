@@ -5,8 +5,13 @@
     <title>Department Form</title>
 </head>
 <body>
+<nav>
+    <a href="/">Show All Departments</a>
+    <a th:href="@{/departmentform}">Add A Department</a>
+</nav>
+
     <h2>Create Department</h2>
-    <form th:action="@{/employeeform}" th:object="${department}" method="post">
+    <form th:action="@{/processDepartment}" th:object="${department}" method="post">
         <input type="hidden" th:field="*{id}"/>
         Department Name:<input type="text" th:field="*{name}"/>
         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span><br/>

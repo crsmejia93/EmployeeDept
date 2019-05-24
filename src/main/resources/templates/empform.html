@@ -5,8 +5,19 @@
     <title>Employee Form</title>
 </head>
 <body>
-    <form th:>
-
+    <form th:action="@{/processEmployee}" th:object="${employee}" method="post">
+        <h2>New Employee</h2>
+        <input type="hidden" th:field="*{id}"/>
+<!--        <input type="hidden" th:field="*{department}" th:value="${department.id}">-->
+        <select name="dept" id="dept" th:field="*{department}">
+            <option th:each="dep : ${departments}"
+                    th:value="${dep.id}"
+                    th:text="${dep.name}"></option>
+        </select>
+        First Name:<input type="text" th:field="*{firstName}"/><span> </span>
+        Last Name:<input type="text" th:field="*{lastName}"/><br/>
+        Position:<input type="text" th:field="*{position}"/><br/>
+        <input type="submit" value="Submit"/>
     </form>
 </body>
 </html>

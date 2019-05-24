@@ -2,9 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Employee</title>
 </head>
 <body>
+<nav>
+    <a href="/">Show All Departments</a>
+    <a th:href="@{/departmentform}">Add A Department</a>
+</nav>
 
+    <div>
+        <h3 th:inline="text">[[${employee.firstName}]] [[${employee.lastName}]]</h3>
+        <p th:inline="text">Department: [[${employee.department.name}]]
+            Position: [[${employee.position}]]</p>
+    </div>
 </body>
 </html>
